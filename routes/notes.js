@@ -7,7 +7,22 @@ notes.get('/', (req, res) => {
 });
 
 // POST route for a new note
-// Todo:
+notes.post('/', (req, res) => {
+    const { title, text } = req.body;
+
+    if (req.body) {
+        const newNote = {title, text};
+
+        readAndAppend(newNote, './db/db.json');
+        res.json('Note added successfully');
+    } else {
+        res.errored('Error adding note')
+    }
+});
+
+// DELETE route for deleting a note
+notes.delete('/', (req, res) => {
+    console.log('note deleted');
+})
 
 module.exports = notes;
-
