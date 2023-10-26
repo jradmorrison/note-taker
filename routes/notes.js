@@ -25,11 +25,18 @@ notes.post('/', (req, res) => {
 // DELETE route for deleting a note
 notes.delete('/:id', (req, res) => {
     
-    const db = readFromFile('./db/db.json');
+    
+    readFromFile('./db/db.json').then((data) => JSON.parse(data));
+    const db = data;
 
-    db.splice(db.findIndex(({id}) => id == req.params.id), 1);
 
-    writeToFile('./db/db.json', db);
+    // for (const note of db) {
+    //     if (note.id == req.params.id) {
+    //         db.splice(note);
+    //     }
+    // }
+
+    // writeToFile('./db/db.json', db);
 
     res.json(`${req.params.id} deleted`);
 })
