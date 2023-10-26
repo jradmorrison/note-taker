@@ -38,6 +38,8 @@
 
   <p align="center">
     A note taking application utilizing express.js for the backend functionality
+    <br>
+    <a href="https://lit-shelf-07030-283b0cf0b7de.herokuapp.com/">Click here to visit the deployed site</a>
   </p>
 </div>
 
