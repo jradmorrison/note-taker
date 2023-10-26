@@ -4,6 +4,7 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
+const uuid = require('../../../helpers/uuid');
 
 if (window.location.pathname === '/notes') {
   noteForm = document.querySelector('.note-form');
@@ -75,7 +76,8 @@ const renderActiveNote = () => {
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
-    text: noteText.value
+    text: noteText.value,
+    id: uuid()
   };
   saveNote(newNote).then(() => {
     getAndRenderNotes();
