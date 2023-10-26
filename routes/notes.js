@@ -12,9 +12,9 @@ notes.post('/', (req, res) => {
     const { title, text } = req.body;
 
     if (req.body) {
-        const newNote = {title, text};
+        const newNote = { title, text };
         newNote.id = uuid();
-        
+
         readAndAppend(newNote, './db/db.json');
         res.json('Note added successfully');
     } else {
@@ -24,20 +24,17 @@ notes.post('/', (req, res) => {
 
 // DELETE route for deleting a note
 notes.delete('/:id', (req, res) => {
-    
-    
-    readFromFile('./db/db.json').then((data) => JSON.parse(data));
-    const db = data;
 
+    readFromFile('./db/db.json').then((data) => {
+        let db = JSON.parse(data);
 
-    // for (const note of db) {
-    //     if (note.id == req.params.id) {
-    //         db.splice(note);
-    //     }
-    // }
-
-    // writeToFile('./db/db.json', db);
-
+        for (let i = 0; i < db.length; i++) {
+            if (db[i].id === req.params.id) {
+                db.splice([i], 1);
+            }
+        };
+        writeToFile('./db/db.json', db);
+    });
     res.json(`${req.params.id} deleted`);
 })
 
